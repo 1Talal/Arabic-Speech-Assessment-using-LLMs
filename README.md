@@ -1,137 +1,49 @@
-# 🎙️ Arabic Speech Assessment using Large Language Models (LLMs)
+# 🎙️ Arabic Speech Assessment UI
 
-AI-powered system for evaluating Arabic speaking proficiency using Large Language Models (LLMs), speech recognition, and automated language assessment.
+واجهة Streamlit احترافية لتقييم اللغة العربية المنطوقة باستخدام نماذج LLM متعددة عبر OpenRouter.
 
----
+## المميزات
 
-## 📖 About the Project
+- واجهة عربية كاملة بدعم RTL وخط Cairo
+- تفريغ الصوت إلى نص بثلاث طرق:
+  - **Groq Whisper** (سريع وسحابي)
+  - **Whisper محلي** (مجاني بدون API)
+  - **إدخال نص يدوي** (للاختبار السريع)
+- تقييم متوازي عبر عدة نماذج: GPT-4o Mini، Claude 3.5 Sonnet، Llama 3.3 70B، Gemini 1.5 Flash، Mistral Large، Qwen 2.5
+- خمسة مقاييس: النطق، الطلاقة، النحو، المفردات، الدرجة العامة
+- تحديد مستوى CEFR (A1 إلى C2)
+- رسوم بيانية تفاعلية (Bar chart + Radar chart) لمقارنة النماذج
+- نقاط القوة والضعف والتوصيات لكل نموذج
+- تصدير النتائج إلى CSV
 
-This project aims to automatically assess Arabic speaking skills by combining Speech-to-Text technology with Large Language Models (LLMs). Users submit an Arabic speech recording, which is transcribed and evaluated based on pronunciation, fluency, grammar, vocabulary, and overall speaking performance.
-
-The system compares multiple LLMs to generate structured assessments, CEFR levels, and personalized feedback.
-
----
-
-## ✨ Features
-
-| Feature                   | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| 🎤 Speech-to-Text         | Convert Arabic speech into text using Whisper |
-| 🤖 Multi-LLM Evaluation   | Compare multiple LLMs for speech assessment   |
-| 🗣 Pronunciation Analysis | Evaluate pronunciation quality                |
-| ⚡ Fluency Assessment      | Measure speaking fluency                      |
-| 📝 Grammar Evaluation     | Detect grammatical issues                     |
-| 📚 Vocabulary Analysis    | Assess vocabulary richness                    |
-| 🌍 CEFR Prediction        | Predict language proficiency level            |
-| 💡 Personalized Feedback  | Generate detailed improvement suggestions     |
-| 📊 Model Comparison       | Compare responses across different LLMs       |
-
----
-
-## 🧠 AI Workflow
-
-Speech Recording
-↓
-Speech-to-Text (Whisper)
-↓
-Prompt Engineering
-↓
-Multiple LLM Evaluation
-↓
-JSON Output Generation
-↓
-Score Comparison
-↓
-Final Assessment Report
-
----
-
-## 📊 Evaluation Criteria
-
-| Criterion       |
-| --------------- |
-| Pronunciation   |
-| Fluency         |
-| Grammar         |
-| Vocabulary      |
-| Overall Score   |
-| CEFR Level      |
-| Strengths       |
-| Weaknesses      |
-| Recommendations |
-
----
-
-## ⚙️ Technologies & Tools
-
-* Python
-* OpenRouter API
-* Whisper
-* Large Language Models (LLMs)
-* Google Colab
-* JSON
-* Pandas
-* GitHub
-
----
-
-## 📂 Project Structure
-
-```text
-Arabic-Speech-Assessment/
-│
-├── notebooks/
-├── prompts/
-├── audio/
-├── results/
-├── utils/
-├── evaluation/
-├── README.md
-```
-
----
-
-## 🚀 How to Run
+## التشغيل
 
 ```bash
-git clone https://github.com/yourusername/Arabic-Speech-Assessment.git
-
+# 1. ثبّت المتطلبات
 pip install -r requirements.txt
 
-Run the notebook in Google Colab.
+# 2. ثبّت ffmpeg
+# Mac:     brew install ffmpeg
+# Ubuntu:  sudo apt-get install ffmpeg
+# Windows: من https://ffmpeg.org
+
+# 3. (اختياري) أنشئ ملف .env من .env.example وضع مفاتيحك
+
+# 4. شغّل التطبيق
+streamlit run app.py
 ```
 
----
+التطبيق راح يفتح تلقائياً على `http://localhost:8501`.
 
-## 📈 Output Example
+## المفاتيح المطلوبة
 
-The system generates:
+- **OpenRouter API Key** — للتقييم بالنماذج (مجاني للتجربة من openrouter.ai)
+- **Groq API Key** (اختياري) — للتفريغ الصوتي السريع (مجاني من console.groq.com)
 
-* Pronunciation Score
-* Fluency Score
-* Grammar Score
-* Vocabulary Score
-* Overall Score
-* CEFR Level
-* Personalized Feedback
+> ⚠️ **مهم**: لا تشارك مفاتيحك علناً. أي مفتاح يتسرب يجب إلغاؤه فوراً.
 
----
+## ملاحظات
 
-## 👨‍💻 Team
-
-- Talal Salem
-- Salman Al-Sulami
-- Mujahid Al-Harbi
-
----
-
-## 🎓 Course Project
-
-College of Computing
-Umm Al-Qura University
-
----
-
-## 📄 License
-
-This project was developed for educational and research purposes.
+- في حالة استخدام Whisper المحلي، أول تشغيل بياخذ وقت لتنزيل النموذج (~500MB لـ small).
+- النماذج تشتغل بالتوازي، فالنتائج تطلع كلها مع بعض بسرعة.
+- النماذج الافتراضية مختارة لتعطي توازن بين الجودة والسعر، لكن تقدر تختار/تشيل أي نموذج من الشريط الجانبي.
